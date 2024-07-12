@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestionnaire de mots de passe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="register" class="container hidden">
+    <h1>Enregistrer un PIN</h1>
+    <form id="register-form">
+      <label for="register-new-pin">Entrez un nouveau PIN :</label>
+      <input type="password" id="register-new-pin" required>
+      <label for="register-confirm-pin">Confirmez le nouveau PIN :</label>
+      <input type="password" id="register-confirm-pin" required>
+      <button type="submit">Enregistrer le PIN</button>
+    </form>
+    <div id="register-messages"></div>
+  </div>
+
+  <div id="login" class="container hidden">
+    <h1>Entrez votre PIN</h1>
+    <form id="login-form">
+      <label for="pin">PIN :</label>
+      <input type="password" id="pin" required>
+      <button type="submit">Se connecter</button>
+    </form>
+    <div id="login-messages"></div>
+    <button id="show-register">Enregistrer un nouveau PIN</button>
+  </div>
+
+  <div id="password-manager" class="container hidden">
+    <h1>Gestionnaire de mots de passe</h1>
+    <form id="password-form">
+      <label for="service">Service :</label>
+      <input type="text" id="service" required>
+      <label for="password">Mot de passe :</label>
+      <input type="password" id="password" required>
+      <button type="submit">Enregistrer</button>
+    </form>
+    <div id="messages"></div>
+    <button id="show-passwords">Afficher la liste des mots de passe</button>
+    <div id="password-list" class="hidden"></div>
+    <button id="logout">Se déconnecter</button>
+  </div>
+
+  <div id="show-password" class="container hidden">
+    <h1>Afficher le mot de passe</h1>
+    <form id="show-password-form">
+      <label for="show-pin">Entrez votre PIN :</label>
+      <input type="password" id="show-pin" required>
+      <button type="submit">Afficher</button>
+    </form>
+    <div id="show-password-messages"></div>
+    <div id="password-display"></div>
+    <button id="back-to-list">Retour à la liste</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

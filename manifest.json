@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "KeepPass",
+    "version": "1.0",
+    "description": "This extension will save and protect your passwords.",
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "storage"
+    ],
+    "action": {
+        "default_icon": {
+            "64": "public/images/web-security.png",
+            "32": "public/images/web-security.png"
+        },
+        "default_popup": "public/popup.html"
+    },
+    "icons": {
+        "64": "public/images/web-security.png"
+    }
+}
