@@ -16,7 +16,7 @@ async function getKey(pin) {
       hash: "SHA-256"
     },
     keyMaterial,
-    { name: "AES-GCM", length: 256 },
+    { name: "AES-CBC", length: 256 },
     false,
     ["encrypt", "decrypt"]
   );
@@ -26,9 +26,9 @@ async function getKey(pin) {
 async function encrypt(password, pin) {
   const key = await getKey(pin);
   const enc = new TextEncoder();
-  const iv = window.crypto.getRandomValues(new Uint8Array(12));
+  const iv = window.crypto.getRandomValues(new Uint8Array(16)); // 16 bytes for AES-CBC
   const encrypted = await window.crypto.subtle.encrypt(
-    { name: "AES-GCM", iv: iv },
+    { name: "AES-CBC", iv: iv },
     key,
     enc.encode(password)
   );
@@ -44,13 +44,12 @@ async function decrypt(encryptedData, pin) {
   const iv = new Uint8Array(encryptedData.iv);
   const encrypted = new Uint8Array(encryptedData.encrypted);
   const decrypted = await window.crypto.subtle.decrypt(
-    { name: "AES-GCM", iv: iv },
+    { name: "AES-CBC", iv: iv },
     key,
     encrypted
   );
   return dec.decode(decrypted);
 }
-
 document.addEventListener('DOMContentLoaded', function() {
   chrome.storage.local.get(['pin'], function(result) {
     if (result.pin) {
@@ -86,7 +85,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     if (pin === result.pin) {
       document.getElementById('login').classList.add('hidden');
       document.getElementById('password-manager').classList.remove('hidden');
-      document.getElementById('password-manager').dataset.pin = pin; 
+      document.getElementById('password-manager').dataset.pin = pin;
     } else {
       document.getElementById('login-messages').innerText = 'PIN incorrect !';
     }
