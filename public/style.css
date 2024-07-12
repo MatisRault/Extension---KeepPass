@@ -75,5 +75,6 @@ body {
 
   #password-display {
     margin-top: 15px;
-    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: larger;
   }
